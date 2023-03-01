@@ -2,7 +2,7 @@
 +$  content  @t
 +$  bg-color  @ux
 +$  text-color  @ux
-+$  board  [=content =bg-color =text-color]
++$  bord  [=content =bg-color =text-color]
 +$  bords  (map =ship =bord)
 +$  following  (set =ship)
 +$  action

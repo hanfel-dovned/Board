@@ -1,9 +1,9 @@
-:~  title+'Pony'
-    info+'Long-form threaded conversations.'
-    color+0x23.2323
-    base+'pony'
-    site+/apps/pony
-    version+[0 1 0]
-    website+'https://github.com/hanfel-dovned/Pony'
+:~  title+'Board'
+    info+'A tapestry of boards.'
+    color+0x9e.34eb
+    base+'board'
+    site+/apps/board
+    version+[1 0 0]
+    website+'https://github.com/hanfel-dovned/Board'
     license+'MIT'
 ==

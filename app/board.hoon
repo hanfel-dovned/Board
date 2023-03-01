@@ -1,4 +1,4 @@
-/-  *board
+/-  *board, pals
 /+  dbug, default-agent, server, schooner
 /*  board-ui  %html  /app/board/html
 |%
@@ -17,7 +17,7 @@
     def  ~(. (default-agent this %.n) bowl)
 ++  on-init
   ^-  (quip card _this)
-  :_  this(bords (~(put by bords) our.bowl ['' 0xff.ffff 0x00.0000]))
+  :_  this(bords (~(put by bords) our.bowl ['' 0xff.ffff 0x0]))
   :~
     :*  %pass  /eyre/connect  %arvo  %e
         %connect  `/apps/board  %board
@@ -97,12 +97,13 @@
     :-  %a
     %+  turn
       ~(tap by bords)
-    |=  =bord
+    |=  [p=@p =bord]
+    %+  frond  (scot %p p)
     :-  %a
     :~
-        [%s content:bord]
-        [%s (scot %ux bg-color:bord)]
-        [%s (scot %ux text-color:bord)]
+        (frond 'text' [%s content:bord])
+        (frond 'bg-color' [%s (scot %ux bg-color:bord)])
+        (frond 'text-color' [%s (scot %ux text-color:bord)])
     ==
   ::
   ++  dejs-action
@@ -117,12 +118,12 @@
     ==
   ::
   ++  handle-action
-    |=  =action:feature
+    |=  =action
     ^-  (quip card _state)
     ?>  =(src.bowl our.bowl)
     ?-    -.action
         %edit-board
-      :_  state(~(put by bords) our.bowl bord:action)
+      :_  state(bords (~(put by bords) our.bowl bord:action))
       :~  :*  %give  %fact  ~[/board-out]
               %board-update 
               !>(`update`[%new-board bord:action])
@@ -138,10 +139,10 @@
       ==
       ::
         %unfollow
-      :_  state(~(del by bords) ship:action)
+      :_  state(bords (~(del by bords) ship:action))
       :~  :*  %pass  /boards-in
               %agent  [ship:action %board]
-              %leave
+              %leave  ~
           ==
       ==
       ::
@@ -168,7 +169,6 @@
 ++  on-agent
   |=  [=wire =sign:agent:gall]
   ^-  (quip card _this)
-  |^
   ?+    wire  (on-agent:def wire sign)
       [%newpals ~]
     ?+    -.sign  (on-agent:def wire sign)
@@ -192,15 +192,16 @@
       [%boards-in ~]
     ?+    -.sign  (on-agent:def wire sign)
         %fact
-      ?+    p.cafe.sign  (on-agent:def wire sign)
+      ?+    p.cage.sign  (on-agent:def wire sign)
           %board-update
         =/  newupdate  !<(update q.cage.sign)
         ?-    -.newupdate
             %new-board
-          `this(~(put by bords) src.bowl +.newupdate)
+          `this(bords (~(put by bords) src.bowl +.newupdate))
         ==
       ==
     ==
+  ==
 ++  on-arvo  on-arvo:def
 ++  on-fail  on-fail:def
 --
