@@ -25,6 +25,10 @@
     :*  %pass  /newpals  %agent
         [our.bowl %pals]  %watch  /targets
     ==  
+    :*  %pass  /boards-in
+        %agent  [~dister-hanfel-dovned %board]
+        %watch  /board-out
+    ==
   ==
 ::
 ++  on-save
@@ -139,6 +143,7 @@
       ==
       ::
         %unfollow
+      ?<  =(our.bowl ship:action)
       :_  state(bords (~(del by bords) ship:action))
       :~  :*  %pass  /boards-in
               %agent  [ship:action %board]
