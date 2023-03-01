@@ -99,6 +99,7 @@
     |=  =^bords
     ^-  json
     :-  %a
+    :-  [%s (scot %p our.bowl)]
     %+  turn
       ~(tap by bords)
     |=  [p=@p =bord]
