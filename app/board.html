@@ -121,6 +121,7 @@
           const ownerName = key;
 
           const boardElem = document.createElement("div");
+          boardElem.id = ownerName;
           boardElem.classList.add("board");
           boardElem.style.backgroundColor = "#" + board[1]["bg-color"].substring(2).replace('.', '');
           boardElem.style.color = "#" + board[2]["text-color"].substring(2).replace('.', '');
@@ -161,7 +162,32 @@
             followDiv.style.display = "none";
           }
         });
+
+        const contentBox = document.getElementById("contentBox");
+        contentBox.addEventListener("input", function() {
+          const newValue = this.value;
+          const boardElem = document.getElementById(myship);
+          const sanitizedContent = DOMPurify.sanitize(newValue, config);
+          boardElem.innerHTML = sanitizedContent;
+        });
+
+        const bgPicker = document.getElementById("bg-color-picker");
+        bgPicker.addEventListener("input", function() {
+          const newValue = this.value;
+          const boardElem = document.getElementById(myship);
+          boardElem.style.backgroundColor = newValue;
+        });
+
+        const textPicker = document.getElementById("text-color-picker");
+        textPicker.addEventListener("input", function() {
+          const newValue = this.value;
+          const boardElem = document.getElementById(myship);
+          boardElem.style.color = newValue;
+        });
     }
+
+
+
     </script>
   </body>
 </html>
