@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .board {
+        width: 300px;
+        height: 450px;
+        border: 1px solid black; /* add a border */
+        box-sizing: border-box; /* include border in element size */
+        float: left; /* display horizontally */
+      }
+      .clearfix:after {
+        content: "";
+        display: block;
+        clear: both;
+      }
+      #edit-div {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+      }
+      #edit-btn {
+        display: block;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="board-container" class="clearfix"></div><br>
+    <button id="edit-toggle">Edit My Board</button>
+    <div id="edit-div" style="display: none;">
+      <textarea id="messageBox" rows="10" cols="50" placeholder="Regular text or HTML"></textarea><br><br>
+      <label for="bg-color-picker">Background Color:</label>
+      <input type="color" id="bg-color-picker"><br><br>
+      <label for="text-color-picker">Text Color:</label>
+      <input type="color" id="text-color-picker"><br><br>
+      <button id="edit-btn">Update My Board</button><br><br>
+    </div>
+
+    <script type="text/javascript" src="purify.min.js"></script>
+    <script>
+      const boardData = {
+        "hanfel-dovned": {
+          text: "<h1>Hello WorldAJKSADKAJSDKJAKSHDFKLAJSDFKJASDKFHASKDFHASKDJFASKDJFHASHDKJADASKJH</h1>",
+          "bg-color": "1a34ff",
+          "text-color": "ffffff"
+        },
+        "minder-folden": {
+          text: "<a style='color: black' href=\"http://google.com\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>",
+          "bg-color": "1234af",
+          "text-color": "ffffff"
+        },
+        "sarlev-sarsen": {
+          text: "<h1 style='color: red'>hello?</h1><ul><li>List item 1</li><li>List item 2</li><li>List item 3</li></ul>",
+          "bg-color": "1a5612",
+          "text-color": "ffffff"
+        },
+        "saffron-camel": {
+          text: "<p>This is some <strong>bold text</strong> and <em>italicized text</em>. Here is a link to <a style='color: hotpink' href=\"https://example.com\">example.com</a>.</p><p>Here is an image: <img src=\"https://via.placeholder.com/150x150\" alt=\"Placeholder Image\"></p>",
+          "bg-color": "ffa500",
+          "text-color": "ffffff"
+        },
+        "verdant-bamboo": {
+          text: "<h2>A list of fruits:</h2><ul><li>Apples</li><li>Bananas</li><li>Cherries</li></ul><p>Here is a code snippet:</p><pre><code>function hello() {\n  console.log('Hello, world!');\n}</code></pre>",
+          "bg-color": "008000",
+          "text-color": "ffffff"
+        },
+        "lavender-lilac": {
+          text: "<h3>This is some <mark>highlighted text</mark>.</h3><p>This is a blockquote:</p><blockquote><p>Four score and seven years ago our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal.</p></blockquote>",
+          "bg-color": "b57edc",
+          "text-color": "ffffff"
+        },
+        "ocean-blue": {
+          text: "<p>This is an unordered list:</p><ul><li>Item 1</li><li>Item 2</li><li>Item 3</li></ul><p>This is an ordered list:</p><ol><li>Item 1</li><li>Item 2</li><li>Item 3</li></ol><p>This is a table:</p><table><thead><tr><th>Name</th><th>Age</th></tr></thead><tbody><tr><td>Alice</td><td>25</td></tr><tr><td>Bob</td><td>32</td></tr><tr><td>Charlie</td><td>47</td></tr></tbody></table>",
+          "bg-color": "0077be",
+          "text-color": "ffffff"
+        }
+      };
+
+      const config = {
+        ALLOWED_TAGS: ["h1", "h2", "h3", "h4", "h5", "h6", "p", "ul", "li", "ol", "a", "strong", "em", "code", "pre", "mark", "table", "thead", "tr", "th", "td", "tbody"],
+        ALLOWED_ATTR: ["href", "style"],
+        ALLOWED_CSS: {
+          "color": true,
+          "background-color": true,
+          "font-size": true,
+          "font-family": true,
+          "text-align": true,
+          "text-decoration": true,
+          "margin": true,
+          "padding": true,
+          "border": true,
+          "border-radius": true,
+          "box-shadow": true
+        }
+      };
+
+      const container = document.getElementById("board-container");
+      let firstBoard = true;
+
+      for (const key in boardData) {
+        if (boardData.hasOwnProperty(key)) {
+          const board = boardData[key];
+          const ownerName = key;
+
+          const boardElem = document.createElement("div");
+          boardElem.classList.add("board");
+          boardElem.style.backgroundColor = "#" + board["bg-color"];
+          boardElem.style.color = "#" + board["text-color"];
+
+          const sanitizedContent = DOMPurify.sanitize(board.text, config);
+          boardElem.innerHTML = sanitizedContent;
+
+          container.appendChild(boardElem);
+        }
+      }
+
+      document.getElementById("edit-toggle").addEventListener("click", function() {
+        var editDiv = document.getElementById("edit-div");
+        if (editDiv.style.display === "none") {
+          editDiv.style.display = "block";
+        } else {
+          editDiv.style.display = "none";
+        }
+      });
+    </script>
+  </body>
+</html>
