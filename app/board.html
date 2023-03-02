@@ -123,13 +123,17 @@
           const boardElem = document.createElement("div");
           boardElem.id = ownerName;
           boardElem.classList.add("board");
-          boardElem.style.backgroundColor = "#" + board[1]["bg-color"].substring(2).replace('.', '');
-          boardElem.style.color = "#" + board[2]["text-color"].substring(2).replace('.', '');
+
+          const bgColor = "#" + board[1]["bg-color"].substring(2).replace('.', '');
+          boardElem.style.backgroundColor = bgColor;
+          const textColor = "#" + board[2]["text-color"].substring(2).replace('.', '');
+          boardElem.style.color = textColor;
 
           const sanitizedContent = DOMPurify.sanitize(board[0].text, config);
           boardElem.innerHTML = sanitizedContent;
 
-          container.appendChild(boardElem);
+          if(sanitizedContent != "" || bgColor != "#ffffff" || ownerName == myship)
+            container.appendChild(boardElem);
         }
 
         let firstBoard = {};
