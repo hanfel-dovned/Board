@@ -66,8 +66,9 @@
         fetch('/apps/board', {
             method: 'POST',
             body: JSON.stringify({[tag]: data})
+        }).then(() => {
+          location.reload()
         })
-        location.reload()
     }
 
     function postFollow()
