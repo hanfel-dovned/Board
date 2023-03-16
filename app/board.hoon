@@ -205,6 +205,9 @@
             %new-board
           `this(bords (~(put by bords) src.bowl +.newupdate))
         ==
+        %kick
+      :_  this
+      :~  [%pass /boards-in %agent [src.bowl %board] %watch /board-out]  ==
       ==
     ==
   ==
