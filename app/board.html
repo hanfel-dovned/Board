@@ -3,24 +3,25 @@
   <head>
     <title>Board</title>
     <style>
-      .board-wrapper {
-        width: 302px;
-        height: 452px;
-        border: 1px solid black; /* add a border */
-        box-sizing: border-box; /* include border in element size */
-        float: left; /* display horizontally */
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        line-height: 0;
       }
-      iframe.board {
+      .board {
         width: 300px;
         height: 450px;
-        border: none;
-        box-sizing: border-box; /* include border in element size */
-        float: left; /* display horizontally */
+        border: 1px solid black;
+        box-sizing: border-box;
+        margin: 0;
       }
-      .clearfix:after {
-        content: "";
-        display: block;
-        clear: both;
+      .board-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: start;
+        margin: 20px;
       }
       #edit-div {
         position: fixed;
@@ -40,16 +41,11 @@
         display: block;
         margin: 0 auto;
       }
-      .board-container-wrapper {
-        display: flex;
-        justify-content: center;
-        text-align: center;
-      }
     </style>
   </head>
   <body>
     <div class="board-container-wrapper">
-      <div id="board-container" class="clearfix"></div>
+      <div id="board-container" class="board-container"></div>
     </div><br>
     <button id="edit-toggle">Edit My Board</button>
     <div id="edit-div" style="display: none;">
