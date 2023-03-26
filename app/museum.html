@@ -80,7 +80,7 @@ function renderPage(state)
 
   function createHTMLRectangle(width, height, text, bgColor, textColor) {
     text = text.replace(/[<>\{\}\[\]]/g, '');
-    
+
     const container = new ThreeMeshUI.Block({
       width: width,
       height: height,
@@ -142,7 +142,8 @@ boardData.forEach((item, index) => {
       break;
   }
 
-  scene.add(rectangle);
+  if(index < 20)
+    scene.add(rectangle);
 });
 
 
