@@ -79,6 +79,8 @@ function renderPage(state)
 
 
   function createHTMLRectangle(width, height, text, bgColor, textColor) {
+    text = text.replace(/[<>\{\}\[\]]/g, '');
+    
     const container = new ThreeMeshUI.Block({
       width: width,
       height: height,
