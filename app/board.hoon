@@ -1,7 +1,6 @@
 /-  *board, pals
 /+  dbug, default-agent, server, schooner
 /*  board-ui  %html  /app/board/html
-/*  museum-ui  %html  /app/museum/html
 |%
 +$  versioned-state
   $%  state-0
@@ -86,12 +85,6 @@
         %-  send
         :+  200  ~  
         :-  %html  board-ui
-        ::
-          [%apps %board %museum ~]
-        :_  state
-        %-  send
-        :+  200  ~  
-        :-  %html  museum-ui
         ::
           [%apps %board %state ~]
         :_  state
