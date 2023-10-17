@@ -29,6 +29,10 @@
         %agent  [~dister-hanfel-dovned %board]
         %watch  /board-out
     ==
+    :*  %pass  /micro
+        %agent  [our.bowl %micro]
+        %poke  %micro-action  !>([%link '/apps/board'])
+    ==
   ==
 ::
 ++  on-save
@@ -71,7 +75,7 @@
         %'POST'
       ?~  body.request.inbound-request
         [(send [405 ~ [%stock ~]]) state]
-      =/  json  (de-json:html q.u.body.request.inbound-request)
+      =/  json  (de:json:html q.u.body.request.inbound-request)
       =/  action  (dejs-action +.json)
       (handle-action action) 
       :: 
