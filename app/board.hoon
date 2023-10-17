@@ -44,7 +44,13 @@
   ^-  (quip card _this)
   =/  old  !<(versioned-state old-state)
   ?-  -.old
-    %0  `this(state old)
+    %0  :_  this(state old)
+        :~
+          :*  %pass  /micro
+              %agent  [our.bowl %micro]
+              %poke  %micro-action  !>([%link '/apps/board'])
+          ==
+        ==
   ==
 ::
 ++  on-poke
